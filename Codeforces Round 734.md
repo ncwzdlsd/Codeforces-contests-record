@@ -98,6 +98,12 @@ int main()
 
 [sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-CF1551D1)
 
+### D2. Domino (hard version)
+
+[Portal.](https://www.luogu.com.cn/problem/CF1551D2)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1551d2)
+
 ### E. Fixed Points
 
 设计状态 $f(i,j)$ 表示对于前 $i$ 个数，删去 $j$ 个数后，满足 $b_i=i$ 的条件个数。 
@@ -135,3 +141,6 @@ int main()
 
 ### F. Equidistant Vertices
 
+[Portal.](https://www.luogu.com.cn/problem/CF1551F)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1551f)

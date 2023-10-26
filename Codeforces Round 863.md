@@ -69,9 +69,9 @@ int main()
 
 [Portal.](https://www.luogu.com.cn/problem/CF1811B)
 
-发现层与层之间可以直接转移，分别计算出两个个点的层数作差即可。
+发现层与层之间可以直接转移，分别计算出两个点的层数作差即可。
 
-这里的层数有外而内递增，易得 $id=\min(x,y,n-x+1.n-y+1)$。
+这里的层数由外而内递增，易得 $id=\min(x,y,n-x+1.n-y+1)$。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -170,3 +170,11 @@ signed main()
 [Portal.](https://www.luogu.com.cn/problem/CF1811F)
 
 [sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1811f)
+
+### G1. Vlad and the Nice Paths (easy version)
+
+### G2. Vlad and the Nice Paths (hard version)
+
+[Portal.](https://www.luogu.com.cn/problem/CF1811G2)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1811g2)
