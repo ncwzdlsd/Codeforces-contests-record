@@ -81,6 +81,74 @@ int main()
 }
 ```
 
+### D. Gadgets for dollars and pounds
+
+[Portal.](https://www.luogu.com.cn/problem/CF609D)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf609d)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define int long long
+
+const int maxn=2e5+5;
+int a[maxn],b[maxn],s,m,n,k;
+struct node{int t/*type*/,c/*cost*/,id;ll v;}p[maxn];
+struct nod{int d,q;}out[maxn];
+
+bool cmp(node a,node b){return a.v<b.v;}
+
+bool check(int x)
+{
+	int mina=INT_MAX,minb=INT_MAX,d1=1,d2=1;
+	for(int i=1;i<=x;i++)
+	{
+		if(a[i]<mina) mina=a[i],d1=i;
+		if(b[i]<minb) minb=b[i],d2=i;
+	}
+	for(int i=1;i<=m;i++) 
+	{
+		if(p[i].t==1) p[i].v=p[i].c*mina;
+		else p[i].v=p[i].c*minb;
+	}
+	sort(p+1,p+m+1,cmp);
+	ll sum=0;
+	for(int i=1;i<=k;i++) sum+=p[i].v;
+	if(sum>s) return 0;
+	for(int i=1;i<=k;i++)
+	{
+		out[i].q=p[i].id;
+		if(p[i].t==1) out[i].d=d1;
+		else out[i].d=d2;
+	}
+	return 1;
+}
+
+signed main()
+{
+	cin>>n>>m>>k>>s;
+	for(int i=1;i<=n;i++) cin>>a[i];
+	for(int i=1;i<=n;i++) cin>>b[i];
+	for(int i=1;i<=m;i++) cin>>p[i].t>>p[i].c,p[i].id=i;
+	int l=0,r=n,ans=0;
+	while(l<=r)
+	{
+		int mid=(l+r)/2;
+		if(check(mid)) ans=mid,r=mid-1;
+		else l=mid+1;
+	}
+	if(ans) 
+	{
+		cout<<ans<<'\n';
+		for(int i=1;i<=k;i++) cout<<out[i].q<<' '<<out[i].d<<'\n';
+	}
+	else cout<<"-1";
+	return 0;
+}
+```
+
 ### E. Minimum spanning tree for each edge
 
 [Portal.](https://www.luogu.com.cn/problem/CF609E)
