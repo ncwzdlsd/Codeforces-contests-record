@@ -240,7 +240,7 @@ int main()
 
 [Portal.](https://www.luogu.com.cn/problem/CF1829G)
 
-x #include <bits/stdc++.h>using namespace std;​const int maxn=505;int f[maxn][maxn],s[maxn][maxn];​int main(){    memset(f,0x3f3f3f,sizeof f);    int n;cin>>n;    for(int i=1;i<=n;i++) cin>>s[i][i],f[i][i]=1;    for(int len=2;len<=n;len++)        for(int i=1;i<=n-len+1;i++)        {            int j=len+i-1;            for(int k=i;k<j;k++)            {                f[i][j]=min(f[i][j],f[i][k]+f[k+1][j]);                if(f[i][k]==1&&f[k+1][j]==1&&s[i][k]==s[k+1][j]) f[i][j]=1,s[i][j]=s[i][k]+1;            }        }    cout<<f[1][n];    return 0;}cpp
+对于一个位置 $(i,j)$，它能产生的贡献只与 $(i-1,j)$ 与 $(i-1,j-1)$ 有关。又因为 $(i-1,j),(i-1,j-1)$ 的总价值统计时都加上了其公共父亲 $(i-2,j-1)$ 的值，将其减去即可。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -255,7 +255,7 @@ void init()
     for(int i=1;i<=2023;i++)
         for(int j=1;j<=i;j++)
         {
-            if(i==1) za[i][j]=1;
+            if(i==1) a[i][j]=1;
             else a[i][j]=id*id+a[i-1][j]+a[i-1][j-1]-a[i-2][j-1];
             s[id]=a[i][j],id++;
         }

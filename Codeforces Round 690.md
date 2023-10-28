@@ -94,3 +94,61 @@ int main()
 }
 ```
 
+### D. Add to Neighbour and Remove
+
+[Portal.](https://www.luogu.com.cn/problem/CF1462D)
+
+由于 $n\leq 3000$，可以考虑 $O(n^2)$ 的暴力。
+
+观察到所谓的合并元素其实就是区间加和。第一个区间的左端点显然为 $1$，暴力枚举第一个区间的右端点，然后统计后面的每个段能否和它区间和相等即可。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+const int maxn=3005;
+int a[maxn];
+
+void solve()
+{
+    int n;cin>>n;
+    for(int i=1;i<=n;i++) cin>>a[i];
+    int res=0,acnt=0,sum=0,ans=0x3f3f3f;
+    for(int i=1;i<=n;i++)
+    {
+        if(i>1) ++acnt;
+        res=acnt,sum+=a[i];
+        int tmp=0;
+        bool flag=1;
+        for(int j=i+1;j<=n;j++)
+        {
+            if(tmp) ++res;
+            tmp+=a[j];
+            if(tmp==sum) tmp=0;
+            else if(tmp>sum) {flag=0,tmp=0;break;}
+        }
+        if(flag&&(!tmp)) ans=min(ans,res); 
+    }
+    cout<<ans<<"\n";
+}
+
+int main()
+{
+    int t;cin>>t;
+    while(t--) solve();
+    return 0;
+}
+```
+
+### E1. Close Tuples (easy version)
+
+[Portal.](https://www.luogu.com.cn/problem/CF1462E1)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1462e1)
+
+### E2. Close Tuples (hard version)
+
+[Portal.](https://www.luogu.com.cn/problem/CF1462E2)
+
+[sol.](https://www.luogu.com.cn/blog/ncwzdlsd/solution-cf1462e2)
