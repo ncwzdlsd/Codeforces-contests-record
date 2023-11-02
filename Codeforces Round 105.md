@@ -62,4 +62,40 @@ int main()
 
 ### E. Porcelain
 
-$f(i,j)$ 表示在第 $i$ 行选择了 $j$ 个数的最大价值、
+[Portal.](https://www.luogu.com.cn/problem/CF148E)
+
+因为每一层都是从最左端或最右端开始维护，考虑用前缀和维护。$s_{i,j}$ 表示 第 $i$ 行前 $j$ 个数的价值，$num_i$ 表示第 $i$ 行的物品数。
+
+考虑把每一层的所有取的情况当成一组处理，这个东西要预处理出来。设 $g(i,j)$ 表示第 $i$ 层取了 $j$ 个物品的最大价值。状态转移 $g(i,j)=\max(g(i,j),s_{i,l}+s_{i,num_i}-s_{i,num_i-(j-l)})$。
+
+处理完这部分之后可以考虑最后的 DP 转移。设 $f(i,j)$ 表示考虑前 $i$ 行，选了 $j$ 个数的最小花费。有 $f(i,j)=\max(f(i,j),f(i-1,j-k)+g(i,k))$。
+
+时间复杂度 $O(n^3)$。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+
+const int maxn=105,maxm=1e4+5;
+int g[maxn][maxn],f[maxn][maxm],s[maxn][maxn],num[maxn];
+
+signed main()
+{
+    int n,m;cin>>n>>m;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>num[i];
+        for(int j=1,a;j<=num[i];j++) cin>>a,s[i][j]=s[i][j-1]+a;
+    }
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=num[i];j++)
+            for(int l=0;l<=j;l++) g[i][j]=max(g[i][j],s[i][l]+s[i][num[i]]-s[i][num[i]-(j-l)]);
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=m;j++)
+            for(int k=0;k<=min(j,num[i]);k++) f[i][j]=max(f[i][j],f[i-1][j-k]+g[i][k]);
+    cout<<f[n][m];
+    return 0;
+}
+```
+
